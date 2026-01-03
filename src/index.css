@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --color-bg: #030712;
+}
+
+@layer base {
+  body {
+    @apply bg-bg min-h-screen;
+  }
+}
