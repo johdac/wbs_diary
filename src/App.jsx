@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import { IconLibrary } from "./core/IconLibrary";
-import { Dock } from "./ui/Dock";
-import { Diary } from "./ui/Diary";
-import { Form } from "./ui/Form";
+import { useEffect, useState } from 'react';
+import { IconLibrary } from './core/IconLibrary';
+import { Dock } from './ui/Dock';
+import { Diary } from './ui/Diary';
+import { Form } from './ui/Form';
 
 function App() {
+  // LOCAL STORAGE MANAGEMENT
   /**
    * We use "lazy initialization" with useState by passing a function instead of a value.
    * JavaScript evaluates function arguments on every render, but when the argument is a
@@ -15,7 +16,7 @@ function App() {
    * existing state value is reused.
    */
   const [data, setData] = useState(() => {
-    const storageData = localStorage.getItem("data");
+    const storageData = localStorage.getItem('data');
     return storageData
       ? JSON.parse(storageData)
       : {
@@ -25,16 +26,25 @@ function App() {
   });
 
   useEffect(() => {
-    console.log("Saving data to local storage");
-    localStorage.setItem("data", JSON.stringify(data));
+    console.log('Saving data to local storage');
+    localStorage.setItem('data', JSON.stringify(data));
   }, [data]);
+
+  // FORM MODAL
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  useEffect(() => {
+    if (isModalOpen) document.getElementById('my_modal_1').showModal();
+    else document.getElementById('my_modal_1').close();
+  });
 
   return (
     <>
       <IconLibrary />
-      <Form data={data} setData={setData} />
-      <Diary entries={data.entries ? data.entries : []} />
-      <Dock data={data} />
+      <div className="container p-6">
+        <Form data={data} setData={setData} />
+        <Diary entries={data.entries ? data.entries : []} />
+        <Dock data={data} />
+      </div>
     </>
   );
 }

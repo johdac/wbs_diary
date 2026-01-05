@@ -18,14 +18,22 @@ export const Form = ({ data, setData }) => {
   const submitForm = (event) => {
     setData((prev) => {
       /**
+       * We add an id to the form data object
+       */
+      const newFormData = {
+        ...formData,
+        ["id"]: crypto.randomUUID(),
+      };
+
+      /**
        * We create the new entries array within our data object by first
        * constructing a new array, consistinng of the old array content
        * spread out + the new entry via formData
        */
-      const newEntries = [...prev.entries, formData];
+      const newEntries = [...prev.entries, newFormData];
 
       // Then we sort the newEntries array by the date values
-      newEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
+      newEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
 
       // Then we spread the complete prev data object but replace the entries array
       return {
@@ -43,7 +51,14 @@ export const Form = ({ data, setData }) => {
           <form onSubmit={submitForm} className="w-full">
             <label className="floating-label mb-4">
               <span>Entry Date</span>
-              <input type="date" name="date" className="input w-full" value={formData.date} onChange={updateForm} />
+              <input
+                required
+                type="date"
+                name="date"
+                className="input w-full"
+                value={formData.date}
+                onChange={updateForm}
+              />
             </label>
             <label className="floating-label mb-4">
               <span>Entry Text</span>
@@ -76,11 +91,11 @@ export const Form = ({ data, setData }) => {
                 title="Must be valid URL"
               />
             </label>
-            <div className="flex justify-end mt-4">
+            <div className="flex justify-end mt-4 gap-2">
               <button type="button" className="btn" onClick={() => document.getElementById("my_modal_1").close()}>
                 Cancel
               </button>
-              <button type="submit" className="btn">
+              <button type="submit" className="btn btn-primary">
                 Submit
               </button>
             </div>

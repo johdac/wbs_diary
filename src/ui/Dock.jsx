@@ -3,7 +3,7 @@ import { Icon } from "./Icon";
 export const Dock = ({ data }) => {
   return (
     <>
-      <div className="dock rounded-md left-5 right-5 bottom-5 w-[calc(100%-2.5rem)] max-w-96 m-auto p-2">
+      <div className="dock bg-dock rounded-md left-5 right-5 bottom-5 w-[calc(100%-2.5rem)] max-w-96 m-auto p-2">
         <button className="cursor-pointer mb-0">
           <Icon svg="first_page" />
           <span className="dock-label">Start</span>

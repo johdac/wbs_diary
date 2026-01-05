@@ -3,10 +3,21 @@
 
 @theme {
   --color-bg: #030712;
+  --color-dock: #203a57;
 }
 
 @layer base {
   body {
     @apply bg-bg min-h-screen;
+  }
+}
+
+@layer components {
+  .container {
+    @apply m-auto;
+  }
+
+  div.card:last-of-type {
+    @apply mb-40;
   }
 }
