@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export const Form = ({ data, setData }) => {
   const [formData, setFormData] = useState({
-    date: "",
-    content: "",
-    imageUrl: "",
+    date: '',
+    title: '',
+    content: '',
+    imageUrl: '',
   });
 
   const updateForm = (event) => {
@@ -22,7 +23,7 @@ export const Form = ({ data, setData }) => {
        */
       const newFormData = {
         ...formData,
-        ["id"]: crypto.randomUUID(),
+        ['id']: crypto.randomUUID(),
       };
 
       /**
@@ -61,6 +62,18 @@ export const Form = ({ data, setData }) => {
               />
             </label>
             <label className="floating-label mb-4">
+              <span>Entry Title</span>
+              <input
+                required
+                type="text"
+                name="title"
+                className="input w-full"
+                placeholder="Entry Title"
+                value={formData.title}
+                onChange={updateForm}
+              ></input>
+            </label>
+            <label className="floating-label mb-4">
               <span>Entry Text</span>
               <textarea
                 required
@@ -92,7 +105,7 @@ export const Form = ({ data, setData }) => {
               />
             </label>
             <div className="flex justify-end mt-4 gap-2">
-              <button type="button" className="btn" onClick={() => document.getElementById("my_modal_1").close()}>
+              <button type="button" className="btn" onClick={() => document.getElementById('my_modal_1').close()}>
                 Cancel
               </button>
               <button type="submit" className="btn btn-primary">

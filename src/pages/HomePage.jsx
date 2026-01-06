@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { IconLibrary } from './core/IconLibrary';
-import { Dock } from './ui/Dock';
-import { Diary } from './ui/Diary';
-import { Form } from './ui/Form';
+import { IconLibrary } from '../core/IconLibrary';
+import { Dock } from '../components/ui/Dock';
+import { Diary } from '../components/ui/Diary';
+import { Form } from '../components/ui/Form';
 
-function App() {
+export const HomePage = () => {
   // LOCAL STORAGE MANAGEMENT
   /**
    * We use "lazy initialization" with useState by passing a function instead of a value.
@@ -47,6 +47,4 @@ function App() {
       </div>
     </>
   );
-}
-
-export default App;
+};
