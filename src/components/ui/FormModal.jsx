@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const Form = ({ data, setData }) => {
+export const FormModal = ({ data, setData }) => {
   const [formData, setFormData] = useState({
     date: new Date().toISOString().split('T')[0],
     title: '',

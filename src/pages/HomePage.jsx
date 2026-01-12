@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { IconLibrary } from '../core/IconLibrary';
 import { Dock } from '../components/ui/Dock';
 import { Diary } from '../components/ui/Diary';
-import { Form } from '../components/ui/Form';
+import { FormModal } from '../components/ui/FormModal';
+import { useSearchParams } from 'react-router';
 
 export const HomePage = () => {
   // LOCAL STORAGE MANAGEMENT
@@ -29,6 +30,26 @@ export const HomePage = () => {
     localStorage.setItem('data', JSON.stringify(data));
   }, [data]);
 
+  // FILTERED ENRIES
+  const [searchParams, setSeachParams] = useSearchParams();
+  const from = searchParams.get('from');
+  const until = searchParams.get('until');
+  const filteredEntries = data.entries.filter((entry) => {
+    if (from && until) {
+      if (entry.date >= from && entry.date <= until) return true;
+      else return false;
+    }
+    if (from) {
+      if (entry.date >= from) return true;
+      else return false;
+    }
+    if (until) {
+      if (entry.date <= until) return true;
+      else return false;
+    }
+    return true;
+  });
+
   // FORM MODAL
   const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
@@ -40,9 +61,9 @@ export const HomePage = () => {
     <>
       <IconLibrary />
       <div className="customContainer pb-10">
-        <Form data={data} setData={setData} />
-        <Diary entries={data.entries ? data.entries : []} />
-        <Dock data={data} />
+        <FormModal data={filteredEntries} setData={setData} />
+        <Diary entries={filteredEntries ? filteredEntries : []} />
+        <Dock searchParams={searchParams} setSearchParams={setSeachParams} />
       </div>
     </>
   );
