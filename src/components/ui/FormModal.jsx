@@ -20,7 +20,7 @@ export const FormModal = ({ data, setData }) => {
 
   const submitForm = (event) => {
     event.preventDefault();
-    if (data.entries.some((entry) => entry.date === formData.date))
+    if (data.entries && data.entries.some((entry) => entry.date === formData.date))
       setFormMessage('You cannot add a second entry for the same date');
     else {
       setFormData(() => formStartData);
