@@ -61,7 +61,7 @@ export const HomePage = () => {
     <>
       <IconLibrary />
       <div className="customContainer pb-10">
-        <FormModal data={filteredEntries} setData={setData} />
+        <FormModal data={data} setData={setData} />
         <Diary entries={filteredEntries ? filteredEntries : []} />
         <Dock searchParams={searchParams} setSearchParams={setSeachParams} />
       </div>

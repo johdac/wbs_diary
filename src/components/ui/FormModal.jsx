@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
 export const FormModal = ({ data, setData }) => {
-  const [formData, setFormData] = useState({
+  const formStartData = {
     date: new Date().toISOString().split('T')[0],
     title: '',
     content: '',
     imageUrl: '',
-  });
+  };
+
+  const [formData, setFormData] = useState(formStartData);
   const [formMessage, setFormMessage] = useState('');
 
   const updateForm = (event) => {
@@ -21,6 +23,7 @@ export const FormModal = ({ data, setData }) => {
     if (data.entries.some((entry) => entry.date === formData.date))
       setFormMessage('You cannot add a second entry for the same date');
     else {
+      setFormData(() => formStartData);
       setData((prev) => {
         /**
          * We add an id to the form data object

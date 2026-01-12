@@ -7,8 +7,8 @@ export const Dock = ({ searchParams, setSearchParams }) => {
 
   // Filter data
   const [filterData, setFilterData] = useState({
-    from: undefined,
-    until: undefined,
+    from: '',
+    until: '',
   });
 
   const updateFilterData = (event) => {
