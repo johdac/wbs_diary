@@ -1,15 +1,22 @@
-import { Icon } from "./Icon";
+import { Icon } from './Icon';
+import { Link } from 'react-router';
 
 export const Dock = ({ data }) => {
   return (
     <>
-      <div className="dock bg-dock rounded-md left-5 right-5 bottom-5 w-[calc(100%-2.5rem)] max-w-96 m-auto p-2">
-        <button className="cursor-pointer mb-0">
+      <div className="dock dark:bg-dock-darkmode text-gray-300 bg-dock-lightmode rounded-md left-5 right-5 bottom-5 w-[calc(100%-2.5rem)] max-w-96 m-auto p-2">
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="cursor-pointer mb-0"
+        >
           <Icon svg="first_page" />
           <span className="dock-label">Start</span>
         </button>
         <button
-          onClick={() => document.getElementById("my_modal_1").showModal()}
+          onClick={() => document.getElementById('my_modal_1').showModal()}
           className="cursor-pointer mb-0 border-l border-slate-700 border-r rounded-none "
         >
           <Icon svg="stylus" />

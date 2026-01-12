@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, data } from 'react-router';
 import { HomePage } from './pages/HomePage';
 import { ErrorPage } from './pages/ErrorPage';
 import { AppLayout } from './components/layout/AppLayout';
@@ -25,7 +25,6 @@ export const router = createBrowserRouter([
           const data = JSON.parse(localStorage.getItem('data'));
           const entry = data.entries.find((entry) => entry.id === params.id);
           if (!entry) {
-            console.log('Page not found');
             throw new Response('Entry not found', { status: 400 });
           }
           return entry;

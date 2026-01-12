@@ -2,46 +2,51 @@ import { useState } from 'react';
 
 export const Form = ({ data, setData }) => {
   const [formData, setFormData] = useState({
-    date: '',
+    date: new Date().toISOString().split('T')[0],
     title: '',
     content: '',
     imageUrl: '',
   });
+  const [formMessage, setFormMessage] = useState('');
 
   const updateForm = (event) => {
     setFormData((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
     }));
-    console.log(formData);
   };
 
   const submitForm = (event) => {
-    setData((prev) => {
-      /**
-       * We add an id to the form data object
-       */
-      const newFormData = {
-        ...formData,
-        ['id']: crypto.randomUUID(),
-      };
+    event.preventDefault();
+    if (data.entries.some((entry) => entry.date === formData.date))
+      setFormMessage('You cannot add a second entry for the same date');
+    else {
+      setData((prev) => {
+        /**
+         * We add an id to the form data object
+         */
+        const newFormData = {
+          ...formData,
+          ['id']: crypto.randomUUID(),
+        };
 
-      /**
-       * We create the new entries array within our data object by first
-       * constructing a new array, consistinng of the old array content
-       * spread out + the new entry via formData
-       */
-      const newEntries = [...prev.entries, newFormData];
+        /**
+         * We create the new entries array within our data object by first
+         * constructing a new array, consistinng of the old array content
+         * spread out + the new entry via formData
+         */
+        const newEntries = [...prev.entries, newFormData];
 
-      // Then we sort the newEntries array by the date values
-      newEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
+        // Then we sort the newEntries array by the date values
+        newEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      // Then we spread the complete prev data object but replace the entries array
-      return {
-        ...prev,
-        entries: newEntries,
-      };
-    });
+        // Then we spread the complete prev data object but replace the entries array
+        return {
+          ...prev,
+          entries: newEntries,
+        };
+      });
+    }
   };
 
   return (
@@ -104,6 +109,7 @@ export const Form = ({ data, setData }) => {
                 title="Must be valid URL"
               />
             </label>
+            {formMessage && <p className="bg-error rounded text-black px-3 py-2 pb-3 font-bold">{formMessage}</p>}
             <div className="flex justify-end mt-4 gap-2">
               <button type="button" className="btn" onClick={() => document.getElementById('my_modal_1').close()}>
                 Cancel

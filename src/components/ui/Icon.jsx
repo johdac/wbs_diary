@@ -1,6 +1,6 @@
-export const Icon = ({ fill = "white", height = 24, svg, width = 24 }) => {
+export const Icon = ({ fillColor, height = 24, svg, width = 24 }) => {
   return (
-    <svg fill={fill} height={height} width={width}>
+    <svg fill="currentColor" color={fillColor} height={height} width={width}>
       <use href={`#${svg}`}></use>
     </svg>
   );

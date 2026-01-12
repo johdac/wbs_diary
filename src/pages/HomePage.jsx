@@ -26,7 +26,6 @@ export const HomePage = () => {
   });
 
   useEffect(() => {
-    console.log('Saving data to local storage');
     localStorage.setItem('data', JSON.stringify(data));
   }, [data]);
 
@@ -40,7 +39,7 @@ export const HomePage = () => {
   return (
     <>
       <IconLibrary />
-      <div className="container p-6">
+      <div className="customContainer pb-10">
         <Form data={data} setData={setData} />
         <Diary entries={data.entries ? data.entries : []} />
         <Dock data={data} />

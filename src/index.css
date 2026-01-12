@@ -1,20 +1,30 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "daisyui";
 
 @theme {
-  --color-bg: #030712;
-  --color-dock: #203a57;
+  --color-bg-darkmode: #030712;
+  --color-bg-lightmode: #efefef;
+  --color-dock-darkmode: var(--color-primary);
+  --color-dock-lightmode: var(--color-primary);
 }
 
 @layer base {
   body {
-    @apply bg-bg min-h-screen;
+    @apply dark:bg-bg-darkmode bg-bg-lightmode min-h-screen;
+  }
+
+  h1 {
+    @apply text-3xl font-bold mb-4;
+  }
+
+  h2 {
+    @apply text-2xl font-bold mb-3;
   }
 }
 
 @layer components {
-  .container {
-    @apply m-auto;
+  .customContainer {
+    @apply m-auto max-w-3xl px-6;
   }
 
   div.card:last-of-type {
